@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JeyhunTech Website
 
-## Getting Started
+A [Next.js](https://nextjs.org) (App Router) project using **TypeScript**, **Tailwind CSS v4**, and **shadcn/ui**.
 
-First, run the development server:
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> 👉 **New to the project?** Read the [Developer Guide](./DEVELOPER_GUIDE.md) for
+> how to add routes, pages, components, and features — plus the **required Git
+> workflow** (branching, rebasing, and Pull Requests).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Other scripts:
 
-## Learn More
+```bash
+pnpm build   # production build
+pnpm start   # run the production build
+pnpm lint    # eslint
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+src/
+├── app/                      # Routing (App Router). Folders = URL segments.
+│   ├── layout.tsx            # Root layout: <html>/<body>, header + footer
+│   ├── globals.css           # Tailwind v4 + design tokens (light/dark)
+│   ├── loading.tsx           # Global loading UI (Suspense fallback)
+│   ├── error.tsx             # Global error boundary (Client Component)
+│   ├── not-found.tsx         # 404 page
+│   ├── page.tsx              # "/"        Home
+│   ├── about/page.tsx        # "/about"   Static Server Component
+│   ├── contact/page.tsx      # "/contact" Uses the contact feature
+│   └── api/
+│       └── health/route.ts   # "/api/health" Route Handler (REST endpoint)
+│
+├── components/
+│   ├── ui/                   # shadcn/ui primitives (button, card, input, ...)
+│   └── layout/               # App-specific composite UI (header, footer)
+│
+├── features/                 # Self-contained feature modules
+│   └── contact/
+│       ├── components/        # Feature UI (contact-form.tsx)
+│       ├── actions.ts         # Server Action (form submission)
+│       └── schema.ts          # Validation + types
+│
+├── hooks/                    # Reusable client hooks (use-media-query.ts)
+├── lib/                      # Framework-agnostic helpers (utils.ts, api.ts)
+├── config/                   # Static config (site.ts)
+└── types/                    # Shared TypeScript types (index.ts)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Why this structure
 
-## Deploy on Vercel
+- **`app/`** is routing only. Each folder is a URL segment; `page.tsx` makes a
+  route public, `layout.tsx` wraps it. Route Groups `(name)` organize files
+  without affecting the URL.
+- **`components/ui`** holds generic, reusable primitives (managed by shadcn);
+  **`components/layout`** holds app-specific composite pieces.
+- **`features/`** keeps a feature's UI, server logic, and types together so it
+  stays easy to find, change, and delete.
+- **`lib/`, `hooks/`, `config/`, `types/`** are shared, cross-cutting code.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Adding more shadcn/ui components
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx shadcn@latest add dialog dropdown-menu sonner
+```
+
+Components are copied into `src/components/ui` and use the `cn()` helper in
+`src/lib/utils.ts` plus the design tokens in `src/app/globals.css`.
