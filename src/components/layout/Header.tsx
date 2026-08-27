@@ -65,7 +65,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="fixed left-0 top-0 z-50 w-full border bg-white shadow-2xl shadow-neutral-300">
+    <nav className="fixed left-0 top-0 z-50 w-full border bg-white shadow shadow-neutral-100">
       {/* Desktop */}
       <div className="mx-8 hidden items-center justify-between py-3 lg:flex">
         <h3 className="text-3xl font-bold">
