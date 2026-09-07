@@ -93,7 +93,7 @@ const Portfolio = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center gap-6 px-8">
           {filteredImages.map((image) => (
             <div
-              className="flex flex-col border border-[#eef4ff] shadow-[0_2px_8px_rgba(20,30,60,0.06)] hover:-translate-y-1.5 hover:shadow-[0_10px_30px_rgba(20,30,60,0.1)] transition-all duration-200 ease-in-out mt-8 rounded-lg"
+              className="flex flex-col w-full border border-[#eef4ff] shadow-[0_2px_8px_rgba(20,30,60,0.06)] hover:-translate-y-1.5 hover:shadow-[0_10px_30px_rgba(20,30,60,0.1)] transition-all duration-200 ease-in-out mt-8 rounded-lg"
               key={image.id}
             >
               <Image
