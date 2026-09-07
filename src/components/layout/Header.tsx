@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const sections = ["home", "about", "services", "portfolio", "blog", "contact"];
+const sections = ["home", "about", "services", "portfolio", "contact"];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,15 +62,18 @@ const Header = () => {
       behavior: "smooth",
       block: "start",
     });
+    window.history.pushState(null, "", `#${section}`);
   };
 
   return (
     <nav className="fixed left-0 top-0 z-50 w-full border bg-white shadow shadow-neutral-100">
       {/* Desktop */}
       <div className="mx-8 hidden items-center justify-between py-3 lg:flex">
-        <h3 className="text-3xl font-bold">
-          Venex<span className="text-[#2563eb]">.</span>
-        </h3>
+        <a href="#">
+          <h3 className="text-3xl font-bold cursor-pointer">
+            Venex<span className="text-[#2563eb]">.</span>
+          </h3>
+        </a>
 
         <div className="flex items-center justify-center gap-10">
           {sections.map((section) => (
@@ -78,10 +81,10 @@ const Header = () => {
               key={section}
               href={`#${section}`}
               onClick={(e) => handleNavigation(e, section)}
-              className={`transition-colors ${
+              className={`transition-colors text-[0.95rem] font-medium ${
                 activeSection === section
                   ? "font-semibold text-[#2563eb]"
-                  : "text-gray-700 hover:text-[#1d4ed8]"
+                  : "text-gray-900 hover:text-[#1d4ed8]"
               }`}
             >
               {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -92,7 +95,7 @@ const Header = () => {
         <Link
           href="#contact"
           onClick={(e) => handleNavigation(e, "contact")}
-          className="rounded-lg bg-[#2563eb] px-5 py-3 text-lg font-semibold text-white hover:bg-[#1d4ed8]"
+          className="rounded-lg bg-[#2563eb] px-5 py-3 text-[0.95rem] font-semibold text-white hover:bg-[#1d4ed8]"
         >
           Get A Quote
         </Link>
@@ -100,9 +103,11 @@ const Header = () => {
 
       {/* Mobile header */}
       <div className="block p-4 lg:hidden">
-        <h3 className="text-3xl font-bold">
-          Venex<span className="text-[#2563eb]">.</span>
-        </h3>
+        <a href="#">
+          <h3 className="text-3xl font-bold">
+            Venex<span className="text-[#2563eb]">.</span>
+          </h3>
+        </a>
 
         <button
           className="absolute right-8 top-4"
@@ -124,10 +129,10 @@ const Header = () => {
             key={section}
             href={`#${section}`}
             onClick={(e) => handleNavigation(e, section)}
-            className={`block w-full border-t py-3 transition-colors ${
+            className={`block text-[0.95rem] font-medium w-full border-t py-3 transition-colors ${
               activeSection === section
                 ? "font-semibold text-[#2563eb]"
-                : "text-gray-700 hover:text-[#1d4ed8]"
+                : "text-gray-900 hover:text-[#1d4ed8]"
             }`}
           >
             {section.charAt(0).toUpperCase() + section.slice(1)}
